@@ -1,15 +1,14 @@
 package io.aretemed.drakkarsdk.config
 
+import org.springframework.boot.SpringBootConfiguration
 import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.boot.context.properties.EnableConfigurationProperties
-import org.springframework.context.annotation.Configuration
 
-@Configuration
+@SpringBootConfiguration
 @EnableConfigurationProperties
 @ConfigurationProperties(prefix = "io.aretemed.drakkarsdk")
 data class DrakkarSDKWebClientProperties(
     var baseUrl: String?,
-    var username: String?,
-    var password: String?,
+    var token: String?,
     var responseTimeout: Long?
 )

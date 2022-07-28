@@ -1,7 +1,6 @@
-package io.aretemed.drakkarsdk
+package io.aretemed.drakkarsdk.client
 
 import com.example.webclientconsumerkotlinsample.model.Rooms
-import com.example.webclientconsumerkotlinsample.model.Token
 import io.aretemed.drakkarsdk.config.DrakkarSDKWebClientProperties
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpHeaders
@@ -16,35 +15,19 @@ import java.time.Duration
 class DrakkarWebClient {
 
     @Autowired
-    private lateinit var properties : DrakkarSDKWebClientProperties
-
-    private var jwtToken: Token? = null
+    var properties : DrakkarSDKWebClientProperties? = null
     
     private fun webClient(): WebClient {
         val client = HttpClient.create()
-            .responseTimeout(Duration.ofSeconds(properties.responseTimeout ?: 60L))
+            .responseTimeout(Duration.ofSeconds(properties?.responseTimeout ?: 60L))
         return WebClient.builder()
-            .baseUrl(properties.baseUrl ?: "https://dev-drakkar.aretemed.io/")
-            .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+            .baseUrl(properties?.baseUrl ?: "https://dev-drakkar.aretemed.io/")
+            .defaultHeaders { headers ->
+                headers.set(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
+                headers.set(HttpHeaders.AUTHORIZATION, "Token ${properties?.token}")
+            }
             .clientConnector(ReactorClientHttpConnector(client))
             .build()
-    }
-
-    fun createToken(username: String, password: String): Token? {
-        return webClient()
-            .post()
-            .uri("api/token/")
-            .retrieve()
-            .bodyToMono(Token::class.java)
-            .block()
-    }
-
-    fun auth() {
-        jwtToken = createToken(properties.username?:"DevUser", properties.password?:"DevPassword")
-    }
-
-    private fun applyAuth(headers: HttpHeaders) {
-        jwtToken?.let { headers.setBearerAuth(it.access) }
     }
 
     fun rooms(limit: Long? = 0L, offset: Long? = 0L): Rooms? {
@@ -58,8 +41,7 @@ class DrakkarWebClient {
 
         return webClient()
             .get()
-            .uri("api/rooms", queryParams)
-            .headers { headers -> applyAuth(headers) }
+            .uri("api/rooms/", queryParams)
             .retrieve()
             .bodyToMono(Rooms::class.java)
             .block()

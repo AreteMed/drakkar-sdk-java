@@ -19,17 +19,18 @@ repositories {
 }
 
 dependencies {
-    testImplementation(kotlin("test"))
+    implementation("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
     implementation("org.springframework.boot:spring-boot-starter-webflux:${springBootVersion}")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${kotlinxCoroutinesVersion}")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor:${kotlinxCoroutinesVersion}")
-    developmentOnly("org.springframework.boot:spring-boot-devtools:$springBootVersion")
+    implementation("com.google.code.gson:gson:2.9.0")
+    testImplementation(kotlin("test"))
     testImplementation("org.springframework.boot:spring-boot-starter-test:$springBootVersion")
-    testImplementation("io.projectreactor:reactor-test")
-    testImplementation("io.mockk:mockk:1.12.2")
+    testImplementation("com.squareup.okhttp3:mockwebserver")
+    testImplementation("org.mockito:mockito-junit-jupiter")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:${kotlinxCoroutinesVersion}")
 }
 

@@ -1,5 +1,4 @@
 io.aretemed.drakkarsdk:
-  baseUrl: https://dev-drakkar.aretemed.io/
-  username: DevUser
-  password: DevPassword
-  responseTimeout: 60
+  #baseUrl: https://dev-drakkar.aretemed.io/
+  #token: DevelopmentToken
+  #responseTimeout: 60
