@@ -6,27 +6,27 @@ import java.util.*
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 data class Room(
-    var business: String,
-    var created: String,
+    var id: String?,
+    var name: String?,
+    var business: String?,
     @JsonProperty("enable_chat")
-    var enableChat: Boolean,
+    var enableChat: Boolean?,
     @JsonProperty("enable_knocking")
-    var enableKnocking: Boolean,
+    var enableKnocking: Boolean?,
     @JsonProperty("enable_people_ui")
-    var enablePeopleUI: Boolean,
+    var enablePeopleUI: Boolean?,
     @JsonProperty("enable_prejoin_ui")
-    var enablePrejoinUI: Boolean,
+    var enablePrejoinUI: Boolean?,
     @JsonProperty("enable_screenshare")
-    var enableScreenshare: Boolean,
+    var enableScreenshare: Boolean?,
     @JsonProperty("expiration_date_time")
     var expirationDateTime: Date?,
-    var id: String,
     @JsonProperty("meeting_join_hook")
     var meetingJoinHook: Date?,
-    var name: String,
     @JsonProperty("not_before_date_time")
     var notBeforeDateTime: Date?,
-    var updated: String
+    var created: Date?,
+    var updated: Date?
 )
 
 @JsonInclude(JsonInclude.Include.NON_NULL)

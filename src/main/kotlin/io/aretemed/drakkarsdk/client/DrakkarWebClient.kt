@@ -1,5 +1,6 @@
 package io.aretemed.drakkarsdk.client
 
+import com.example.webclientconsumerkotlinsample.model.Room
 import com.example.webclientconsumerkotlinsample.model.Rooms
 import io.aretemed.drakkarsdk.config.DrakkarSDKWebClientProperties
 import org.springframework.beans.factory.annotation.Autowired
@@ -8,6 +9,7 @@ import org.springframework.http.MediaType
 import org.springframework.http.client.reactive.ReactorClientHttpConnector
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.client.WebClient
+import reactor.core.publisher.Mono
 import reactor.netty.http.client.HttpClient
 import java.time.Duration
 
@@ -46,4 +48,45 @@ class DrakkarWebClient {
             .bodyToMono(Rooms::class.java)
             .block()
     }
+
+    fun room(id: String): Room? {
+        return webClient()
+            .get()
+            .uri("api/rooms/${id}")
+            .retrieve()
+            .bodyToMono(Room::class.java)
+            .block()
+    }
+
+    fun createRoom(room: Room): Room? {
+        return webClient()
+            .post()
+            .uri("api/rooms/create-room/")
+            .contentType(MediaType.APPLICATION_JSON)
+            .body(Mono.just(room), Room::class.java)
+            .retrieve()
+            .bodyToMono(Room::class.java)
+            .block()
+    }
+
+    fun updateRoom(room: Room): Room? {
+        return webClient()
+            .put()
+            .uri("api/rooms/${room.id}/update-room/")
+            .contentType(MediaType.APPLICATION_JSON)
+            .body(Mono.just(room), Room::class.java)
+            .retrieve()
+            .bodyToMono(Room::class.java)
+            .block()
+    }
+
+    fun deleteRoom(room: Room) : Void? {
+        return webClient()
+            .delete()
+            .uri("api/rooms/${room.id}")
+            .retrieve()
+            .bodyToMono(Void::class.java)
+            .block()
+    }
+    
 }
