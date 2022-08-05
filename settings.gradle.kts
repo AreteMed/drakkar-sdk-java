@@ -1,3 +1,3 @@
 
-rootProject.name = "drakkar-sdk-java"
+rootProject.name = "sdk-java"
 

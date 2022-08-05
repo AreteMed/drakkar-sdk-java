@@ -22,23 +22,23 @@ git clone https://github.com/AreteMed/drakkar-sdk-java.git
 Make sure the "Drakkar Telehealth SDK" available on the local Maven's repository
 - Unix/Mac (by default)
 ```
-~/.m2/repository/io/aretemed/drakkar-sdk-java
+~/.m2/repository/io/aretemed/drakkar/sdk-java
 ```
 - Or Windows (by default)
 ```
-C:\Users\{Username}\.m2\repository\io\aretemed\drakkar-sdk-java
+C:\Users\{Username}\.m2\repository\io\aretemed\drakkar\sdk-java
 ```
 ### Add the "Drakkar Telehealth SDK" into a Spring-Boot Project
 #### Add Dependency
 - Gradle
 ```
-implementation("io.aretemed:drakkar-sdk-java:1.0-SNAPSHOT")
+implementation("io.aretemed.drakkar:sdk-java:1.0-SNAPSHOT")
 ```
 - Or Maven
 ```
 <dependency>
-    <groupId>io.aretemed</groupId>
-    <artifactId>drakkar-sdk-java</artifactId>
+    <groupId>io.aretemed.drakkar</groupId>
+    <artifactId>sdk-java</artifactId>
     <version>1.0-SNAPSHOT</version>
 </dependency>
 ```

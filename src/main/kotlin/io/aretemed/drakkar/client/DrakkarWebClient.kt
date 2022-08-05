@@ -1,8 +1,8 @@
-package io.aretemed.drakkarsdk.client
+package io.aretemed.drakkar.client
 
 import com.example.webclientconsumerkotlinsample.model.Room
 import com.example.webclientconsumerkotlinsample.model.Rooms
-import io.aretemed.drakkarsdk.config.DrakkarSDKWebClientProperties
+import io.aretemed.drakkar.config.DrakkarSDKWebClientProperties
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpHeaders
 import org.springframework.http.MediaType

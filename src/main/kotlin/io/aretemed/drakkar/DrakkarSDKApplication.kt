@@ -1,7 +1,7 @@
-package io.aretemed.drakkarsdk
+package io.aretemed.drakkar
 
 import com.google.gson.Gson
-import io.aretemed.drakkarsdk.client.DrakkarWebClient
+import io.aretemed.drakkar.client.DrakkarWebClient
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.ApplicationArguments
 import org.springframework.boot.ApplicationRunner

@@ -6,9 +6,10 @@ plugins {
     id("org.springframework.boot") version "2.5.9"
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
     `maven-publish`
+    signing
 }
 
-group = "io.aretemed"
+group = "io.aretemed.drakkar"
 version = "1.0-SNAPSHOT"
 
 val springBootVersion by extra("2.1.5.RELEASE")
@@ -35,6 +36,13 @@ dependencies {
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:${kotlinxCoroutinesVersion}")
 }
 
+
+
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
 publishing {
     publications {
         create<MavenPublication>("maven") {
@@ -43,8 +51,47 @@ publishing {
             version = version
 
             from(components["java"])
+            suppressPomMetadataWarningsFor("runtimeElements")
+            pom {
+                name.set("Drakkar Telehealth SDK")
+                description.set("Wrapper of Drakkar API")
+                url.set("https://github.com/AreteMed/drakkar-sdk-java")
+                scm {
+                    connection.set("scm:git:git://github.com/AreteMed/drakkar-sdk-java.git")
+                    developerConnection.set("scm:git@github.com:AreteMed/drakkar-sdk-java.git")
+                    url.set("https://github.com/AreteMed/drakkar-sdk-java")
+                }
+                licenses {
+                    license {
+                        name.set("The Apache License, Version 2.0")
+                        url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+                    }
+                }
+                developers {
+                    developer {
+                        id.set("Oleg")
+                        name.set("Oleg Bogriakov")
+                        email.set("oleg.bogriakov@aretemed.io")
+                    }
+                }
+            }
         }
     }
+    repositories {
+        maven {
+            val releasesUrl = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
+            val snapshotsUrl = uri("https://s01.oss.sonatype.org/content/repositories/snapshots/")
+            url = if (version.toString().endsWith("SNAPSHOT")) snapshotsUrl else releasesUrl
+            credentials {
+                username = project.properties["ossrhUsername"].toString()
+                password = project.properties["ossrhPassword"].toString()
+            }
+        }
+    }
+}
+
+signing {
+    sign(publishing.publications["maven"])
 }
 
 tasks.test {

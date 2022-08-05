@@ -2,7 +2,8 @@ package io.aretemed.drakkarsdk.client
 
 import com.example.webclientconsumerkotlinsample.model.Rooms
 import com.google.gson.Gson
-import io.aretemed.drakkarsdk.config.DrakkarSDKWebClientProperties
+import io.aretemed.drakkar.client.DrakkarWebClient
+import io.aretemed.drakkar.config.DrakkarSDKWebClientProperties
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.jupiter.api.AfterAll
