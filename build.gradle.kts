@@ -45,7 +45,7 @@ java {
 
 publishing {
     publications {
-        create<MavenPublication>("maven") {
+        create<MavenPublication>("mavenCentral") {
             groupId = group.toString()
             artifactId = rootProject.name
             version = version
@@ -91,7 +91,7 @@ publishing {
 }
 
 signing {
-    sign(publishing.publications["maven"])
+    sign(publishing.publications["mavenCentral"])
 }
 
 tasks.test {
