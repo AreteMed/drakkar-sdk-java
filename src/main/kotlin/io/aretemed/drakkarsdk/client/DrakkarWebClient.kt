@@ -88,5 +88,5 @@ class DrakkarWebClient {
             .bodyToMono(Void::class.java)
             .block()
     }
-    
+
 }

@@ -5,9 +5,10 @@ plugins {
     kotlin("plugin.spring") version "1.6.10"
     id("org.springframework.boot") version "2.5.9"
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
+    `maven-publish`
 }
 
-group = "io.aretemed.drakkar-sdk"
+group = "io.aretemed"
 version = "1.0-SNAPSHOT"
 
 val springBootVersion by extra("2.1.5.RELEASE")
@@ -32,6 +33,18 @@ dependencies {
     testImplementation("com.squareup.okhttp3:mockwebserver")
     testImplementation("org.mockito:mockito-junit-jupiter")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:${kotlinxCoroutinesVersion}")
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            groupId = group.toString()
+            artifactId = rootProject.name
+            version = version
+
+            from(components["java"])
+        }
+    }
 }
 
 tasks.test {

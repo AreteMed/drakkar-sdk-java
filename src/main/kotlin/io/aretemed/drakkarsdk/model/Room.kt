@@ -6,28 +6,32 @@ import java.util.*
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 data class Room(
-    var id: String?,
-    var name: String?,
-    var business: String?,
+    val id: String? = null,
+    val name: String? = null,
+    val business: String? = null,
     @JsonProperty("enable_chat")
-    var enableChat: Boolean?,
+    var enableChat: Boolean? = null,
     @JsonProperty("enable_knocking")
-    var enableKnocking: Boolean?,
+    var enableKnocking: Boolean? = null,
     @JsonProperty("enable_people_ui")
-    var enablePeopleUI: Boolean?,
+    var enablePeopleUI: Boolean? = null,
     @JsonProperty("enable_prejoin_ui")
-    var enablePrejoinUI: Boolean?,
+    var enablePrejoinUI: Boolean? = null,
     @JsonProperty("enable_screenshare")
-    var enableScreenshare: Boolean?,
+    var enableScreenshare: Boolean? = null,
     @JsonProperty("expiration_date_time")
-    var expirationDateTime: Date?,
+    var expirationDateTime: Date? = null,
     @JsonProperty("meeting_join_hook")
-    var meetingJoinHook: Date?,
+    var meetingJoinHook: Date? = null,
     @JsonProperty("not_before_date_time")
-    var notBeforeDateTime: Date?,
-    var created: Date?,
-    var updated: Date?
-)
+    var notBeforeDateTime: Date? = null,
+    val created: Date? = null,
+    val updated: Date? = null
+) {
+    constructor() : this(id = null) {
+
+    }
+}
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 data class Rooms(
