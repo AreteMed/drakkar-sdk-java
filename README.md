@@ -14,7 +14,14 @@ git clone https://github.com/AreteMed/drakkar-sdk-java.git
 ```
 ./gradlew build
 ```
-#### Publish
+#### Publish locally
+Comment the following block in the build.gradle.kts
+```
+signing {
+  sign(publishing.publications["mavenCentral"])
+}
+```
+Run Publish
 ```
 ./gradlew publishToMavenLocal
 ```
