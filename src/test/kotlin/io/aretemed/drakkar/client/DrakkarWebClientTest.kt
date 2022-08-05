@@ -1,9 +1,8 @@
-package io.aretemed.drakkarsdk.client
+package io.aretemed.drakkar.client
 
 import com.example.webclientconsumerkotlinsample.model.Rooms
 import com.google.gson.Gson
-import io.aretemed.drakkar.client.DrakkarWebClient
-import io.aretemed.drakkar.config.DrakkarSDKWebClientProperties
+import io.aretemed.drakkar.config.DrakkarWebClientProperties
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.jupiter.api.AfterAll
@@ -31,7 +30,7 @@ class DrakkarWebClientTest {
         val testUrl = "http://localhost"
         mockServer.start()
         mockServer.url(testUrl)
-        webClient.properties = DrakkarSDKWebClientProperties(
+        webClient.properties = DrakkarWebClientProperties(
             baseUrl = "${testUrl}:${mockServer.port}/",
             token = "TestToken",
             responseTimeout = 60L

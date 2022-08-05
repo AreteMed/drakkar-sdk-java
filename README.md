@@ -46,10 +46,10 @@ implementation("io.aretemed.drakkar:sdk-java:1.0-SNAPSHOT")
 ```
 @ComponentScan("io.aretemed")
 ```
-#### Specify io.aretemed.drakkarsdk.token inside Spring's configuration
+#### Specify io.aretemed.drakkar.token inside Spring's configuration
 For example, resources/application.yml
 ```
-io.aretemed.drakkarsdk:
+io.aretemed.drakkar:
   token: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
 #### "Inject" DrakkarWebClient

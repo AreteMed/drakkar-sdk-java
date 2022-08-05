@@ -2,7 +2,7 @@ package io.aretemed.drakkar.client
 
 import com.example.webclientconsumerkotlinsample.model.Room
 import com.example.webclientconsumerkotlinsample.model.Rooms
-import io.aretemed.drakkar.config.DrakkarSDKWebClientProperties
+import io.aretemed.drakkar.config.DrakkarWebClientProperties
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpHeaders
 import org.springframework.http.MediaType
@@ -17,7 +17,7 @@ import java.time.Duration
 class DrakkarWebClient {
 
     @Autowired
-    var properties : DrakkarSDKWebClientProperties? = null
+    var properties : DrakkarWebClientProperties? = null
     
     private fun webClient(): WebClient {
         val client = HttpClient.create()

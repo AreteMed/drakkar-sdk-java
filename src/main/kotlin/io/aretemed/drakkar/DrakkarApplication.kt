@@ -11,7 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.builder.SpringApplicationBuilder
 
 @SpringBootApplication
-class DrakkarSDKApplication: ApplicationRunner {
+class DrakkarApplication: ApplicationRunner {
 
     @Autowired
     private lateinit var drakkarWebClient: DrakkarWebClient
@@ -31,7 +31,7 @@ class DrakkarSDKApplication: ApplicationRunner {
 
 
 fun main(args: Array<String>) {
-    SpringApplicationBuilder(DrakkarSDKApplication::class.java)
+    SpringApplicationBuilder(DrakkarApplication::class.java)
         .bannerMode(Banner.Mode.OFF)
         .web(WebApplicationType.NONE)
         .run(*args)
