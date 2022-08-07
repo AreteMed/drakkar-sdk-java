@@ -10,8 +10,8 @@ env:
 phases:
   pre_build:
     commands:
-      - pwd
       - mv /home/gradle/project/gradle.properties.ci gradle.properties
+      - mv /home/gradle/project/secring.kbx .
   build:
     commands:
       - gradle publishAllPublicationsToMavenRepository
