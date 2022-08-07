@@ -10,7 +10,8 @@ env:
 phases:
   pre_build:
     commands:
-      - mv gradle.properties.ci gradle.properties
+      - pwd
+      - mv /home/gradle/project/gradle.properties.ci gradle.properties
   build:
     commands:
       - gradle publishAllPublicationsToMavenRepository
