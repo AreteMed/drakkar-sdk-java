@@ -10,9 +10,8 @@ env:
 phases:
   pre_build:
     commands:
-      - pwd
-      - ls -al /home/gradle/project
-      - mv /home/gradle/project/* .
+      - cp /home/gradle/project/* .
+      - mv gradle.properties.ci gradle.properties
       - pwd
       - ls -al
   build:
