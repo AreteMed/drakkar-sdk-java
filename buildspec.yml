@@ -1,0 +1,12 @@
+version: 0.2
+
+env:
+  shell: bash
+phases:
+  pre_build:
+    commands:
+      - cp /home/gradle/project/* .
+      - mv gradle.properties.local gradle.properties
+  build:
+    commands:
+      - gradle publishAllPublicationsToMavenRepository
