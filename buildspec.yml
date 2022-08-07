@@ -1,19 +1,12 @@
 version: 0.2
 
 env:
-  parameter-store:
-     SIGNING_KEY: "/drakkar/java-sdk/SIGNING_KEY"
-     SIGNING_PASSPHRASE: "/drakkar/java-sdk/SIGNING_PASSPHRASE"
-     KEYRINGFILE: "/drakkar/java-sdk/KEYRINGFILE"
-     OSSRH_USER: "/drakkar/java-sdk/OSSRH_USER"
-     OSSRH_PASSWORD: "/drakkar/java-sdk/OSSRH_PASSWORD"
+  shell: bash
 phases:
   pre_build:
     commands:
       - cp /home/gradle/project/* .
-      - mv gradle.properties.ci gradle.properties
-      - pwd
-      - ls -al
+      - mv gradle.properties.local gradle.properties
   build:
     commands:
       - gradle publishAllPublicationsToMavenRepository
