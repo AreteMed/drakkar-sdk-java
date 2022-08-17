@@ -22,7 +22,7 @@ data class Room(
     @JsonProperty("expiration_date_time")
     var expirationDateTime: Date? = null,
     @JsonProperty("meeting_join_hook")
-    var meetingJoinHook: Date? = null,
+    var meetingJoinHook: String? = null,
     @JsonProperty("not_before_date_time")
     var notBeforeDateTime: Date? = null,
     val created: Date? = null,

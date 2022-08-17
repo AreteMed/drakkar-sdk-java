@@ -80,6 +80,17 @@ class DrakkarWebClient {
             .block()
     }
 
+    fun createMeetingToken(room: Room): Room? {
+        return webClient()
+            .post()
+            .uri("api/rooms/${room.id}/create-meeting-token/")
+            .contentType(MediaType.APPLICATION_JSON)
+            .body(Mono.just(room), Room::class.java)
+            .retrieve()
+            .bodyToMono(Room::class.java)
+            .block()
+    }
+
     fun deleteRoom(room: Room) : Void? {
         return webClient()
             .delete()
