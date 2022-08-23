@@ -188,30 +188,4 @@ class DrakkarWebClient {
         }
     }
 
-    fun deleteRoom(room: Room): DeleteRoomStatus {
-        var clientResponse: ClientResponse? = null
-        val responseBody = webClient()
-            .delete()
-            .uri("api/rooms/${room.id}")
-            .exchangeToMono { response ->
-                clientResponse = response
-                if (response.statusCode().equals(HttpStatus.OK)) {
-                    return@exchangeToMono response.bodyToMono(DeleteRoomStatus::class.java)
-                } else {
-                    return@exchangeToMono response.bodyToMono(String::class.java)
-                }
-
-            }
-            .block()
-
-        if (responseBody is DeleteRoomStatus) {
-            return responseBody
-        } else {
-            throw RestClientException(
-                responseBody!!.toString(),
-                clientResponse?.createException()?.block() as Throwable
-            )
-        }
-    }
-
 }
