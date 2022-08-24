@@ -21,8 +21,8 @@ class DrakkarApplication: ApplicationRunner {
         val callAPI = args?.getOptionValues("callAPI")?.first()
         val response =
             when (callAPI) {
-                "rooms" -> Gson().toJson(drakkarWebClient.rooms())
-                "createRoom" -> Gson().toJson(drakkarWebClient.createRoom(Room()))
+                "rooms" -> Gson().toJson(drakkarWebClient.roomAPI().rooms())
+                "createRoom" -> Gson().toJson(drakkarWebClient.roomAPI().createRoom(Room()))
                 else -> ""
             }
 
