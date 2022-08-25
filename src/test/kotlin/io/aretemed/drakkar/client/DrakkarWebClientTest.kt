@@ -51,7 +51,7 @@ class DrakkarWebClientTest {
                 .setBody(Gson().toJson(roomsMock))
                 .addHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
         )
-        val roomsFromResponse = webClient.rooms()
+        val roomsFromResponse = webClient.roomAPI().rooms()
         val recordedRequest = mockServer.takeRequest()
         assertEquals("GET", recordedRequest.method)
         assertEquals("/api/rooms/", recordedRequest.path)
