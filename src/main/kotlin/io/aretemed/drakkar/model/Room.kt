@@ -1,10 +1,13 @@
-package com.example.webclientconsumerkotlinsample.model
+package io.aretemed.drakkar.model
 
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
 import java.util.*
 
+/**
+ * An Entity representing "Drakkar Room"
+ */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 data class Room(
     val id: String? = null,
@@ -34,6 +37,9 @@ data class Room(
     }
 }
 
+/**
+ * The Status of Creating Room
+ */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 data class CreateRoomStatus(
     val success: Boolean,
@@ -41,17 +47,18 @@ data class CreateRoomStatus(
     val id: String? = null,
 )
 
+/**
+ * The Status of Creating Meeting Token
+ */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 data class CreateMeetingTokenStatus(
     val success: Boolean,
     val url: String? = null,
 )
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
-data class DeleteRoomStatus(
-    val success: Boolean
-)
-
+/**
+ * A Holder of params for Creating Meeting Token
+ */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 data class CreateMeetingTokenInfo(
     @JsonIgnore
@@ -64,7 +71,9 @@ data class CreateMeetingTokenInfo(
     val isOwner: Boolean
 )
 
-
+/**
+ * A Holder of info about available "Rooms"
+ */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 data class Rooms(
     var count: Long,

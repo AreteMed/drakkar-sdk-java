@@ -39,14 +39,14 @@ C:\Users\{Username}\.m2\repository\io\aretemed\drakkar\sdk-java
 #### Add Dependency
 - Gradle
 ```
-implementation("io.aretemed.drakkar:sdk-java:1.0-SNAPSHOT")
+implementation("io.aretemed.drakkar:sdk-java:1.0.3")
 ```
 - Or Maven
 ```
 <dependency>
     <groupId>io.aretemed.drakkar</groupId>
     <artifactId>sdk-java</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.3</version>
 </dependency>
 ```
 #### Include "Component Scan" for "io.aretemed", e.g.
@@ -73,5 +73,5 @@ private DrakkarWebClient drakkarWebClient;
 #### Enjoy the Drakkar Telehealth SDK
 E.g. in order to get Rooms just do the following
 ```
-drakkarWebClient.rooms()
+drakkarWebClient.roomAPI().rooms()
 ```

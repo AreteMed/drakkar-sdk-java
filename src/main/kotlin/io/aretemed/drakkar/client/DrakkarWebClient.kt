@@ -1,9 +1,7 @@
 package io.aretemed.drakkar.client
 
-import com.example.webclientconsumerkotlinsample.model.*
 import io.aretemed.drakkar.config.DrakkarWebClientProperties
-import io.aretemed.drakkar.model.Encounter
-import io.aretemed.drakkar.model.Encounters
+import io.aretemed.drakkar.model.*
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
@@ -17,6 +15,9 @@ import reactor.core.publisher.Mono
 import reactor.netty.http.client.HttpClient
 import java.time.Duration
 
+/**
+ * An Entry Point Component for calling the Drakkar API
+ */
 @Component
 class DrakkarWebClient {
 
@@ -36,9 +37,23 @@ class DrakkarWebClient {
             .build()
     }
 
+    /**
+     * A method for obtaining a Holder of Room API
+     */
     fun roomAPI() = RoomAPI()
+
+    /**
+     * Just a Holder of Room API
+     */
     inner class RoomAPI {
 
+        /**
+         * Getting available Rooms
+         *
+         * @param limit The Limit for result of available Rooms
+         * @param offset The offset for result of available Rooms
+         * @return Rooms object which holds info about available "Rooms" @see io.aretemed.drakkar.model.Rooms
+         */
         fun rooms(limit: Int? = 0, offset: Int? = 0): Rooms {
             val queryParams = mutableMapOf<String, Any>()
             if (limit != null && limit > 0) {
@@ -72,6 +87,12 @@ class DrakkarWebClient {
             }
         }
 
+        /**
+         * Getting a Room by id
+         *
+         * @param id The id of the desired Room
+         * @return Room object representing the Room Entity itself @see io.aretemed.drakkar.model.Room
+         */
         fun room(id: String): Room {
             var clientResponse: ClientResponse? = null
             val responseBody = webClient()
@@ -97,6 +118,12 @@ class DrakkarWebClient {
             }
         }
 
+        /**
+         * Creating a Room
+         *
+         * @param room The desired Room to be created
+         * @return CreateRoomStatus object representing the status of creating the Room @see io.aretemed.drakkar.model.CreateRoomStatus
+         */
         fun createRoom(room: Room): CreateRoomStatus {
             var clientResponse: ClientResponse? = null
             val responseBody = webClient()
@@ -125,6 +152,12 @@ class DrakkarWebClient {
             }
         }
 
+        /**
+         * Updating a Room
+         *
+         * @param room The desired Room to be updated to the passed state
+         * @return Room object after update @see io.aretemed.drakkar.model.Room
+         */
         fun updateRoom(room: Room): Room {
             var clientResponse: ClientResponse? = null
             val responseBody = webClient()
@@ -165,6 +198,12 @@ class DrakkarWebClient {
             )
         }
 
+        /**
+         * Create Meeting Token
+         *
+         * @param createMeetingTokenInfo a holder of params to Create Meeting Token
+         * @return CreateMeetingTokenStatus object representing the status of creating the Meeting Token @see io.aretemed.drakkar.model.CreateMeetingTokenStatus
+         */
         fun createMeetingToken(createMeetingTokenInfo: CreateMeetingTokenInfo): CreateMeetingTokenStatus {
             var clientResponse: ClientResponse? = null
             val responseBody = webClient()
@@ -194,8 +233,23 @@ class DrakkarWebClient {
         }
     }
 
+    /**
+     * A method for obtaining a Holder of Encounter API
+     */
     fun encounterAPI() = EncounterAPI()
+
+    /**
+     * Just a Holder of Room API
+     */
     inner class EncounterAPI {
+
+        /**
+         * Getting available Encounters
+         *
+         * @param limit The Limit for result of available Encounters
+         * @param offset The offset for result of available Encounters
+         * @return Rooms object which holds info about available "Encounters" @see io.aretemed.drakkar.model.Encounters
+         */
         fun encounters(limit: Int? = 0, offset: Int? = 0): Encounters {
             val queryParams = mutableMapOf<String, Any>()
             if (limit != null && limit > 0) {
@@ -228,6 +282,13 @@ class DrakkarWebClient {
                 )
             }
         }
+
+        /**
+         * Getting an Encounter by id
+         *
+         * @param id The id of the desired Encounter
+         * @return Encounter object representing the Encounter Entity itself @see io.aretemed.drakkar.model.Encounter
+         */
         fun encounter(id: String): Encounter {
             var clientResponse: ClientResponse? = null
             val responseBody = webClient()
