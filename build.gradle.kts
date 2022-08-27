@@ -5,12 +5,13 @@ plugins {
     kotlin("plugin.spring") version "1.6.10"
     id("org.springframework.boot") version "2.5.9"
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
+    id ("org.jetbrains.dokka") version "1.7.10"
     `maven-publish`
     signing
 }
 
 group = "io.aretemed.drakkar"
-version = "1.0.3"
+version = "1.0.4"
 
 val springBootVersion by extra("2.1.5.RELEASE")
 val kotlinxCoroutinesVersion by extra("1.6.4")
