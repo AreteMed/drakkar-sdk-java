@@ -1,6 +1,6 @@
 package io.aretemed.drakkar.client
 
-import com.example.webclientconsumerkotlinsample.model.Rooms
+import io.aretemed.drakkar.model.Rooms
 import com.google.gson.Gson
 import io.aretemed.drakkar.config.DrakkarWebClientProperties
 import okhttp3.mockwebserver.MockResponse

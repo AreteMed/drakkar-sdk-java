@@ -1,6 +1,6 @@
 package io.aretemed.drakkar
 
-import com.example.webclientconsumerkotlinsample.model.Room
+import io.aretemed.drakkar.model.Room
 import com.google.gson.Gson
 import io.aretemed.drakkar.client.DrakkarWebClient
 import org.springframework.beans.factory.annotation.Autowired

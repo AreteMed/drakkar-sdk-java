@@ -1,10 +1,12 @@
 package io.aretemed.drakkar.model
 
-import com.example.webclientconsumerkotlinsample.model.Room
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
 import java.util.*
 
+/**
+ * An Entity representing "Drakkar Encounter"
+ */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 data class Encounter(
     val id: String? = null,
@@ -24,6 +26,9 @@ data class Encounter(
     }
 }
 
+/**
+ * A Holder of info about available "Encounters"
+ */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 data class Encounters(
     var count: Long,
