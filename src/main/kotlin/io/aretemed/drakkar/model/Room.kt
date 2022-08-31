@@ -1,5 +1,6 @@
 package io.aretemed.drakkar.model
 
+import com.fasterxml.jackson.annotation.JsonFormat
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
@@ -14,8 +15,10 @@ data class Room(
     val name: String? = null,
     val business: String? = null,
     @JsonProperty("not_before_date_time")
+    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
     var notBeforeDateTime: Date? = null,
     @JsonProperty("expiration_date_time")
+    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
     var expirationDateTime: Date? = null,
     @JsonProperty("enable_chat")
     var enableChat: Boolean? = null,
@@ -29,7 +32,9 @@ data class Room(
     var enableScreenshare: Boolean? = null,
     @JsonProperty("meeting_join_hook")
     var meetingJoinHook: String? = null,
+    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
     val created: Date? = null,
+    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
     val updated: Date? = null
 ) {
     constructor() : this(id = null) {

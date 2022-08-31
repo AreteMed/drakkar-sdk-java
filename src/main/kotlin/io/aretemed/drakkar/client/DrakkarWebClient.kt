@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.http.client.reactive.ReactorClientHttpConnector
 import org.springframework.stereotype.Component
+import org.springframework.util.LinkedMultiValueMap
 import org.springframework.web.client.*
 import org.springframework.web.reactive.function.client.ClientResponse
 import org.springframework.web.reactive.function.client.WebClient
@@ -55,18 +56,18 @@ class DrakkarWebClient {
          * @return Rooms object which holds info about available "Rooms" @see io.aretemed.drakkar.model.Rooms
          */
         fun rooms(limit: Int? = 0, offset: Int? = 0): Rooms {
-            val queryParams = mutableMapOf<String, Any>()
+            val queryParams = LinkedMultiValueMap<String, String>()
             if (limit != null && limit > 0) {
-                queryParams["limit"] = limit
+                queryParams["limit"] = limit.toString()
             }
             if (offset != null && offset > 0) {
-                queryParams["offset"] = offset
+                queryParams["offset"] = offset.toString()
             }
 
             var clientResponse: ClientResponse? = null
             val responseBody = webClient()
                 .get()
-                .uri("api/rooms/", queryParams)
+                .uri{uriBuilder -> uriBuilder.path("api/rooms/").queryParams(queryParams).build()}
                 .exchangeToMono { response ->
                     clientResponse = response
                     if (response.statusCode().equals(HttpStatus.OK)) {
@@ -97,7 +98,7 @@ class DrakkarWebClient {
             var clientResponse: ClientResponse? = null
             val responseBody = webClient()
                 .get()
-                .uri("api/rooms/${id}")
+                .uri("api/rooms/${id}/")
                 .exchangeToMono { response ->
                     clientResponse = response
                     if (response.statusCode().equals(HttpStatus.OK)) {
@@ -251,18 +252,18 @@ class DrakkarWebClient {
          * @return Rooms object which holds info about available "Encounters" @see io.aretemed.drakkar.model.Encounters
          */
         fun encounters(limit: Int? = 0, offset: Int? = 0): Encounters {
-            val queryParams = mutableMapOf<String, Any>()
+            val queryParams = LinkedMultiValueMap<String, String>()
             if (limit != null && limit > 0) {
-                queryParams["limit"] = limit
+                queryParams["limit"] = limit.toString()
             }
             if (offset != null && offset > 0) {
-                queryParams["offset"] = offset
+                queryParams["offset"] = offset.toString()
             }
 
             var clientResponse: ClientResponse? = null
             val responseBody = webClient()
                 .get()
-                .uri("api/encounters/", queryParams)
+                .uri{uriBuilder -> uriBuilder.path("api/encounters/").queryParams(queryParams).build()}
                 .exchangeToMono { response ->
                     clientResponse = response
                     if (response.statusCode().equals(HttpStatus.OK)) {
@@ -293,7 +294,7 @@ class DrakkarWebClient {
             var clientResponse: ClientResponse? = null
             val responseBody = webClient()
                 .get()
-                .uri("api/encounters/${id}")
+                .uri("api/encounters/${id}/")
                 .exchangeToMono { response ->
                     clientResponse = response
                     if (response.statusCode().equals(HttpStatus.OK)) {

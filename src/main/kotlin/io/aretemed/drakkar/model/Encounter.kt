@@ -1,5 +1,6 @@
 package io.aretemed.drakkar.model
 
+import com.fasterxml.jackson.annotation.JsonFormat
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
 import java.util.*
@@ -12,13 +13,17 @@ data class Encounter(
     val id: String? = null,
     val room: String? = null,
     @JsonProperty("actual_start_date_time")
+    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
     var actualStartDateTime: Date? = null,
     @JsonProperty("actual_end_date_time")
+    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
     var actualEndDateTime: Date? = null,
     @JsonProperty("scheduled_start_date_time")
     var scheduledStartDateTime: Date? = null,
     var duration: Int? = null,
-    val created: String? = null,
+    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
+    val created: Date? = null,
+    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
     val updated: Date? = null
 ) {
     constructor() : this(id = null) {
