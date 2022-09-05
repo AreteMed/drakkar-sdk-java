@@ -8,6 +8,7 @@ plugins {
     id ("org.jetbrains.dokka") version "1.7.10"
     `maven-publish`
     signing
+    jacoco
 }
 
 group = "io.aretemed.drakkar"
@@ -109,4 +110,19 @@ tasks.withType<Test> {
 
 tasks.test {
     useJUnitPlatform()
+}
+
+tasks.withType(JacocoReport::class.java).all {
+    reports {
+        xml.required.set(true)
+        xml.outputLocation.set(File("$buildDir/reports/jacoco/report.xml"))
+    }
+}
+
+tasks.withType<Test> {
+    jacoco {
+        toolVersion = "0.8.3"
+        reportsDirectory.set(File("$buildDir/reports/jacoco"))
+    }
+    finalizedBy("jacocoTestReport")
 }
