@@ -1,7 +1,7 @@
 package io.aretemed.drakkar
 
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import io.aretemed.drakkar.model.Room
-import com.google.gson.Gson
 import io.aretemed.drakkar.client.DrakkarWebClient
 import io.aretemed.drakkar.model.CreateMeetingTokenInfo
 import org.springframework.beans.factory.annotation.Autowired
@@ -19,6 +19,7 @@ class DrakkarApplication: ApplicationRunner {
     private lateinit var drakkarWebClient: DrakkarWebClient
 
     override fun run(args: ApplicationArguments?) {
+        val jsonMapper = jacksonObjectMapper()
         val callAPI = args?.getOptionValues("callAPI")?.first()
         val roomId = args?.getOptionValues("roomId")?.first()
         val limit = args?.getOptionValues("limit")?.first()
@@ -31,17 +32,17 @@ class DrakkarApplication: ApplicationRunner {
 
         val response =
             when (callAPI) {
-                "rooms" -> Gson().toJson(
+                "rooms" -> jsonMapper.writeValueAsString(
                     drakkarWebClient.roomAPI().rooms((limit ?: "0").toInt(), (offset ?: "0").toInt())
                 )
-                "roomById" -> Gson().toJson(drakkarWebClient.roomAPI().room(roomId!!))
-                "createRoom" -> Gson().toJson(drakkarWebClient.roomAPI().createRoom(Room()))
+                "roomById" -> jsonMapper.writeValueAsString(drakkarWebClient.roomAPI().room(roomId!!))
+                "createRoom" -> jsonMapper.writeValueAsString(drakkarWebClient.roomAPI().createRoom(Room()))
                 "updateRoomKnocking" -> {
                     val room = drakkarWebClient.roomAPI().room(roomId!!)
                     room.enableKnocking = enableKnocking.toBoolean()
-                    Gson().toJson(drakkarWebClient.roomAPI().updateRoom(room))
+                    jsonMapper.writeValueAsString(drakkarWebClient.roomAPI().updateRoom(room))
                 }
-                "createMeetingToken" -> Gson().toJson(
+                "createMeetingToken" -> jsonMapper.writeValueAsString(
                     drakkarWebClient.roomAPI().createMeetingToken(
                         CreateMeetingTokenInfo(
                             roomId = roomId!!,
@@ -51,10 +52,10 @@ class DrakkarApplication: ApplicationRunner {
                         )
                     )
                 )
-                "encounters" -> Gson().toJson(
+                "encounters" -> jsonMapper.writeValueAsString(
                     drakkarWebClient.encounterAPI().encounters((limit ?: "0").toInt(), (offset ?: "0").toInt())
                 )
-                "encounterById" -> Gson().toJson(drakkarWebClient.encounterAPI().encounter(encounterId!!))
+                "encounterById" -> jsonMapper.writeValueAsString(drakkarWebClient.encounterAPI().encounter(encounterId!!))
                 else -> ""
             }
 
