@@ -32,6 +32,7 @@ data class Room(
     var enableScreenshare: Boolean? = null,
     @JsonProperty("meeting_join_hook")
     var meetingJoinHook: String? = null,
+    var url: String? = null,
     @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
     val created: Date? = null,
     @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
