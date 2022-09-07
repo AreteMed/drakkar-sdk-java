@@ -20,7 +20,7 @@ implementation("io.aretemed.drakkar:sdk-java:1.0.5")
 ```
 #### Include "Component Scan" for "io.aretemed", e.g.
 ```
-@ComponentScan("io.aretemed")
+@ComponentScan("io.aretemed.drakkar")
 ```
 #### Specify io.aretemed.drakkar.token inside Spring's configuration
 For example, resources/application.yml
