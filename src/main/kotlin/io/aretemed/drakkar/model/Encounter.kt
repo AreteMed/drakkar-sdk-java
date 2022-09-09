@@ -19,6 +19,7 @@ data class Encounter(
     @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
     var actualEndDateTime: Date? = null,
     @JsonProperty("scheduled_start_date_time")
+    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
     var scheduledStartDateTime: Date? = null,
     var duration: Int? = null,
     @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
