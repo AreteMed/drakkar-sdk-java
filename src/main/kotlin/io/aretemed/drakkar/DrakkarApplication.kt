@@ -42,6 +42,11 @@ class DrakkarApplication: ApplicationRunner {
                     room.enableKnocking = enableKnocking.toBoolean()
                     jsonMapper.writeValueAsString(drakkarWebClient.roomAPI().updateRoom(room))
                 }
+                "updateRoomJoinHookToNull" -> {
+                    val room = drakkarWebClient.roomAPI().room(roomId!!)
+                    room.meetingJoinHook = null
+                    jsonMapper.writeValueAsString(drakkarWebClient.roomAPI().updateRoom(room))
+                }
                 "createMeetingToken" -> jsonMapper.writeValueAsString(
                     drakkarWebClient.roomAPI().createMeetingToken(
                         CreateMeetingTokenInfo(

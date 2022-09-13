@@ -43,6 +43,26 @@ data class Room(
     }
 }
 
+data class RoomForUpdate(
+    @JsonProperty("not_before_date_time")
+    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
+    var notBeforeDateTime: Date? = null,
+    @JsonProperty("expiration_date_time")
+    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
+    var expirationDateTime: Date? = null,
+    @JsonProperty("enable_chat")
+    var enableChat: Boolean? = null,
+    @JsonProperty("enable_knocking")
+    var enableKnocking: Boolean? = null,
+    @JsonProperty("enable_people_ui")
+    var enablePeopleUI: Boolean? = null,
+    @JsonProperty("enable_prejoin_ui")
+    var enablePrejoinUI: Boolean? = null,
+    @JsonProperty("enable_screenshare")
+    var enableScreenshare: Boolean? = null,
+    @JsonProperty("meeting_join_hook")
+    var meetingJoinHook: String? = null
+)
 /**
  * The Status of Creating Room
  */

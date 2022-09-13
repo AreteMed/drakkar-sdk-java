@@ -165,7 +165,7 @@ class DrakkarWebClient {
                 .put()
                 .uri("api/rooms/${room.id}/update-room/")
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(Mono.just(cleanReadOnlyRoomFields(room)), Room::class.java)
+                .body(Mono.just(mapToRoomForUpdate(room)), RoomForUpdate::class.java)
                 .exchangeToMono { response ->
                     clientResponse = response
                     if (response.statusCode().equals(HttpStatus.OK)) {
@@ -186,8 +186,8 @@ class DrakkarWebClient {
             }
         }
 
-        private fun cleanReadOnlyRoomFields(room: Room): Room {
-            return Room(
+        private fun mapToRoomForUpdate(room: Room): RoomForUpdate {
+            return RoomForUpdate(
                 notBeforeDateTime = room.notBeforeDateTime,
                 expirationDateTime = room.expirationDateTime,
                 enableChat = room.enableChat,
