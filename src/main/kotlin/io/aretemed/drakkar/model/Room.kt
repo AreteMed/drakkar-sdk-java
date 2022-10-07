@@ -4,12 +4,14 @@ import com.fasterxml.jackson.annotation.JsonFormat
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
+import io.aretemed.drakkar.custom.Generated
 import java.util.*
 
 /**
  * An Entity representing "Drakkar Room"
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@Generated
 data class Room(
     val id: String? = null,
     val name: String? = null,
@@ -43,6 +45,7 @@ data class Room(
     }
 }
 
+@Generated
 data class RoomForUpdate(
     @JsonProperty("not_before_date_time")
     @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
@@ -67,6 +70,7 @@ data class RoomForUpdate(
  * The Status of Creating Room
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@Generated
 data class CreateRoomStatus(
     val success: Boolean,
     val url: String? = null,
@@ -77,6 +81,7 @@ data class CreateRoomStatus(
  * The Status of Creating Meeting Token
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@Generated
 data class CreateMeetingTokenStatus(
     val success: Boolean,
     val url: String? = null,
@@ -86,6 +91,7 @@ data class CreateMeetingTokenStatus(
  * A Holder of params for Creating Meeting Token
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@Generated
 data class CreateMeetingTokenInfo(
     @JsonIgnore
     val roomId: String,
@@ -101,6 +107,7 @@ data class CreateMeetingTokenInfo(
  * A Holder of info about available "Rooms"
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@Generated
 data class Rooms(
     var count: Long,
     var next: String?,

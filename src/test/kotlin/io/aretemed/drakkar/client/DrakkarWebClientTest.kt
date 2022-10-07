@@ -63,6 +63,23 @@ class DrakkarWebClientTest {
     }
 
     @Test
+    fun roomsByLimitAndOffset() {
+        val roomsMock = Rooms(count = 50, next = "next", previous = "previous", results = emptyList())
+
+        mockServer.enqueue(
+            MockResponse()
+                .setBody(jsonMapper.writeValueAsString(roomsMock))
+                .addHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+        )
+
+        val roomsFromResponse = webClient.roomAPI().rooms(20, 100)
+        val recordedRequest = mockServer.takeRequest()
+        assertEquals("GET", recordedRequest.method)
+        assertEquals("/api/rooms/?limit=20&offset=100", recordedRequest.path)
+        assertEquals(jsonMapper.writeValueAsString(roomsMock), jsonMapper.writeValueAsString(roomsFromResponse))
+    }
+
+    @Test
     fun room() {
         val roomMock = Room(
             id = "12345",
@@ -159,6 +176,23 @@ class DrakkarWebClientTest {
         val recordedRequest = mockServer.takeRequest()
         assertEquals("GET", recordedRequest.method)
         assertEquals("/api/encounters/", recordedRequest.path)
+        assertEquals(jsonMapper.writeValueAsString(encountersMock), jsonMapper.writeValueAsString(encountersFromResponse))
+    }
+
+    @Test
+    fun encountersByLimitAndOffset() {
+        val encountersMock = Encounters(count = 50, next = "next", previous = "previous", results = emptyList())
+
+        mockServer.enqueue(
+            MockResponse()
+                .setBody(jsonMapper.writeValueAsString(encountersMock))
+                .addHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+        )
+
+        val encountersFromResponse = webClient.encounterAPI().encounters(20, 100)
+        val recordedRequest = mockServer.takeRequest()
+        assertEquals("GET", recordedRequest.method)
+        assertEquals("/api/encounters/?limit=20&offset=100", recordedRequest.path)
         assertEquals(jsonMapper.writeValueAsString(encountersMock), jsonMapper.writeValueAsString(encountersFromResponse))
     }
 

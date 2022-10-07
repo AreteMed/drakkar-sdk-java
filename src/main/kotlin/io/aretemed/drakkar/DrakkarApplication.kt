@@ -3,6 +3,7 @@ package io.aretemed.drakkar
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import io.aretemed.drakkar.model.Room
 import io.aretemed.drakkar.client.DrakkarWebClient
+import io.aretemed.drakkar.custom.Generated
 import io.aretemed.drakkar.model.CreateMeetingTokenInfo
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.ApplicationArguments
@@ -13,6 +14,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.builder.SpringApplicationBuilder
 
 @SpringBootApplication
+@Generated
 class DrakkarApplication: ApplicationRunner {
 
     @Autowired
@@ -71,6 +73,7 @@ class DrakkarApplication: ApplicationRunner {
 }
 
 
+@Generated
 fun main(args: Array<String>) {
     SpringApplicationBuilder(DrakkarApplication::class.java)
         .bannerMode(Banner.Mode.OFF)
