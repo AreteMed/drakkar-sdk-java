@@ -3,12 +3,14 @@ package io.aretemed.drakkar.model
 import com.fasterxml.jackson.annotation.JsonFormat
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
+import io.aretemed.drakkar.custom.Generated
 import java.util.*
 
 /**
  * An Entity representing "Drakkar Encounter"
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@Generated
 data class Encounter(
     val id: String? = null,
     val room: String? = null,
@@ -36,6 +38,7 @@ data class Encounter(
  * A Holder of info about available "Encounters"
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@Generated
 data class Encounters(
     var count: Long,
     var next: String?,

@@ -1,6 +1,7 @@
 package io.aretemed.drakkar.client
 
 import io.aretemed.drakkar.config.DrakkarWebClientProperties
+import io.aretemed.drakkar.custom.Generated
 import io.aretemed.drakkar.model.*
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpHeaders
@@ -25,14 +26,18 @@ class DrakkarWebClient {
     @Autowired
     var properties: DrakkarWebClientProperties? = null
 
+    @Generated
     private fun webClient(): WebClient {
+        val timeout = properties?.responseTimeout ?: 60L
+        val baseUrl = properties?.baseUrl ?: "https://dev-drakkar.aretemed.io/"
+        val token = properties?.token
         val client = HttpClient.create()
-            .responseTimeout(Duration.ofSeconds(properties?.responseTimeout ?: 60L))
+            .responseTimeout(Duration.ofSeconds(timeout))
         return WebClient.builder()
-            .baseUrl(properties?.baseUrl ?: "https://dev-drakkar.aretemed.io/")
+            .baseUrl(baseUrl)
             .defaultHeaders { headers ->
                 headers.set(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
-                headers.set(HttpHeaders.AUTHORIZATION, "Token ${properties?.token}")
+                headers.set(HttpHeaders.AUTHORIZATION, "Token ${token}")
             }
             .clientConnector(ReactorClientHttpConnector(client))
             .build()
