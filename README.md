@@ -1,7 +1,7 @@
 # Drakkar Telehealth SDK (Java/Kotlin)
 
 ## Overview
-This document describes a way of how to include this "Drakkar Telehealth SDK" into a desired Spring Boot Project
+This document describes a way of how to include the "Drakkar Telehealth SDK" into a desired Spring Boot Project
 
 ## Quick Setup Guide
 ### Add the "Drakkar Telehealth SDK" into a Spring-Boot Project
