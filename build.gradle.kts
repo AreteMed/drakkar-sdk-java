@@ -12,7 +12,7 @@ plugins {
 }
 
 group = "io.aretemed.drakkar"
-version = "1.0.9"
+version = "1.0.10"
 
 val springBootVersion by extra("2.1.5.RELEASE")
 val kotlinxCoroutinesVersion by extra("1.6.4")
@@ -43,6 +43,8 @@ dependencies {
 java {
     withJavadocJar()
     withSourcesJar()
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
 }
 
 publishing {
