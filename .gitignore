@@ -3,7 +3,6 @@ build/
 gradle.properties.local
 gradle.properties.ci
 .gradletasknamecache
-Dockerfile
 secring.kbx
 
 # IntelliJ IDEA
