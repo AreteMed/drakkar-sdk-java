@@ -77,6 +77,8 @@ publishing {
             version = version
 
             from(components["java"])
+            artifact(tasks["sourcesJar"])
+            artifact(tasks["javadocJar"])
 
             pom {
                 name.set("Drakkar Telehealth SDK")
