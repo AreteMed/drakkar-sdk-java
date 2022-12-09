@@ -34,8 +34,7 @@ class DrakkarWebClientTest {
         mockServer.url(testUrl)
         webClient.properties = DrakkarWebClientProperties(
             baseUrl = "${testUrl}:${mockServer.port}/",
-            token = "TestToken",
-            responseTimeout = 60L
+            token = "TestToken"
         )
     }
 

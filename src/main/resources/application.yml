@@ -1,4 +1,3 @@
 io.aretemed.drakkar:
   #baseUrl: https://dev-drakkar.aretemed.io/
   #token: DevelopmentToken
-  #responseTimeout: 60

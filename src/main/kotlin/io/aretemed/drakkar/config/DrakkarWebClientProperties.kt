@@ -12,5 +12,4 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 data class DrakkarWebClientProperties(
     var baseUrl: String?,
     var token: String?,
-    var responseTimeout: Long?
 )

@@ -10,12 +10,9 @@ import org.springframework.http.MediaType
 import org.springframework.http.client.reactive.ReactorClientHttpConnector
 import org.springframework.stereotype.Component
 import org.springframework.util.LinkedMultiValueMap
-import org.springframework.web.client.*
-import org.springframework.web.reactive.function.client.ClientResponse
 import org.springframework.web.reactive.function.client.WebClient
 import reactor.core.publisher.Mono
 import reactor.netty.http.client.HttpClient
-import java.time.Duration
 
 /**
  * An Entry Point Component for calling the Drakkar API
@@ -28,18 +25,15 @@ class DrakkarWebClient {
 
     @Generated
     private fun webClient(): WebClient {
-        val timeout = properties?.responseTimeout ?: 60L
         val baseUrl = properties?.baseUrl ?: "https://dev-drakkar.aretemed.io/"
         val token = properties?.token
-        val client = HttpClient.create()
-            .responseTimeout(Duration.ofSeconds(timeout))
         return WebClient.builder()
             .baseUrl(baseUrl)
             .defaultHeaders { headers ->
                 headers.set(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
                 headers.set(HttpHeaders.AUTHORIZATION, "Token ${token}")
             }
-            .clientConnector(ReactorClientHttpConnector(client))
+            .clientConnector(ReactorClientHttpConnector(HttpClient.create()))
             .build()
     }
 
@@ -69,27 +63,16 @@ class DrakkarWebClient {
                 queryParams["offset"] = offset.toString()
             }
 
-            var clientResponse: ClientResponse? = null
-            val responseBody = webClient()
+            val response = webClient()
                 .get()
-                .uri{uriBuilder -> uriBuilder.path("api/rooms/").queryParams(queryParams).build()}
-                .exchangeToMono { response ->
-                    clientResponse = response
-                    if (response.statusCode().equals(HttpStatus.OK)) {
-                        return@exchangeToMono response.bodyToMono(Rooms::class.java)
-                    } else {
-                        return@exchangeToMono response.bodyToMono(String::class.java)
-                    }
-                }
+                .uri { uriBuilder -> uriBuilder.path("api/rooms/").queryParams(queryParams).build() }
+                .exchange()
                 .block()
 
-            if (responseBody is Rooms) {
-                return responseBody
+            if (HttpStatus.OK == response?.statusCode()) {
+                return response.bodyToMono(Rooms::class.java).block()!!
             } else {
-                throw RestClientException(
-                    responseBody!!.toString(),
-                    clientResponse?.createException()?.block() as Throwable
-                )
+                throw Throwable("${response?.statusCode()} \n ${response?.bodyToMono(String::class.java)?.block()}")
             }
         }
 
@@ -100,27 +83,16 @@ class DrakkarWebClient {
          * @return Room object representing the Room Entity itself @see io.aretemed.drakkar.model.Room
          */
         fun room(id: String): Room {
-            var clientResponse: ClientResponse? = null
-            val responseBody = webClient()
+            val response = webClient()
                 .get()
                 .uri("api/rooms/${id}/")
-                .exchangeToMono { response ->
-                    clientResponse = response
-                    if (response.statusCode().equals(HttpStatus.OK)) {
-                        return@exchangeToMono response.bodyToMono(Room::class.java)
-                    } else {
-                        return@exchangeToMono response.bodyToMono(String::class.java)
-                    }
-                }
+                .exchange()
                 .block()
 
-            if (responseBody is Room) {
-                return responseBody
+            if (HttpStatus.OK == response?.statusCode()) {
+                return response.bodyToMono(Room::class.java).block()!!
             } else {
-                throw RestClientException(
-                    responseBody!!.toString(),
-                    clientResponse?.createException()?.block() as Throwable
-                )
+                throw Throwable("${response?.statusCode()} \n ${response?.bodyToMono(String::class.java)?.block()}")
             }
         }
 
@@ -131,30 +103,18 @@ class DrakkarWebClient {
          * @return CreateRoomStatus object representing the status of creating the Room @see io.aretemed.drakkar.model.CreateRoomStatus
          */
         fun createRoom(room: Room): CreateRoomStatus {
-            var clientResponse: ClientResponse? = null
-            val responseBody = webClient()
+            val response = webClient()
                 .post()
                 .uri("api/rooms/create-room/")
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(Mono.just(room), Room::class.java)
-                .exchangeToMono { response ->
-                    clientResponse = response
-                    if (response.statusCode().equals(HttpStatus.OK)) {
-                        return@exchangeToMono response.bodyToMono(CreateRoomStatus::class.java)
-                    } else {
-                        return@exchangeToMono response.bodyToMono(String::class.java)
-                    }
-
-                }
+                .exchange()
                 .block()
 
-            if (responseBody is CreateRoomStatus) {
-                return responseBody
+            if (HttpStatus.OK == response?.statusCode()) {
+                return response.bodyToMono(CreateRoomStatus::class.java).block()!!
             } else {
-                throw RestClientException(
-                    responseBody!!.toString(),
-                    clientResponse?.createException()?.block() as Throwable
-                )
+                throw Throwable("${response?.statusCode()} \n ${response?.bodyToMono(String::class.java)?.block()}")
             }
         }
 
@@ -165,29 +125,18 @@ class DrakkarWebClient {
          * @return Room object after update @see io.aretemed.drakkar.model.Room
          */
         fun updateRoom(room: Room): Room {
-            var clientResponse: ClientResponse? = null
-            val responseBody = webClient()
+            val response = webClient()
                 .put()
                 .uri("api/rooms/${room.id}/update-room/")
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(Mono.just(mapToRoomForUpdate(room)), RoomForUpdate::class.java)
-                .exchangeToMono { response ->
-                    clientResponse = response
-                    if (response.statusCode().equals(HttpStatus.OK)) {
-                        return@exchangeToMono response.bodyToMono(Room::class.java)
-                    } else {
-                        return@exchangeToMono response.bodyToMono(String::class.java)
-                    }
-                }
+                .exchange()
                 .block()
 
-            if (responseBody is Room) {
-                return responseBody
+            if (HttpStatus.OK == response?.statusCode()) {
+                return response.bodyToMono(Room::class.java).block()!!
             } else {
-                throw RestClientException(
-                    responseBody!!.toString(),
-                    clientResponse?.createException()?.block() as Throwable
-                )
+                throw Throwable("${response?.statusCode()} \n ${response?.bodyToMono(String::class.java)?.block()}")
             }
         }
 
@@ -211,30 +160,18 @@ class DrakkarWebClient {
          * @return CreateMeetingTokenStatus object representing the status of creating the Meeting Token @see io.aretemed.drakkar.model.CreateMeetingTokenStatus
          */
         fun createMeetingToken(createMeetingTokenInfo: CreateMeetingTokenInfo): CreateMeetingTokenStatus {
-            var clientResponse: ClientResponse? = null
-            val responseBody = webClient()
+            val response = webClient()
                 .post()
                 .uri("api/rooms/${createMeetingTokenInfo.roomId}/create-meeting-token/")
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(Mono.just(createMeetingTokenInfo), CreateMeetingTokenInfo::class.java)
-                .exchangeToMono { response ->
-                    clientResponse = response
-                    if (response.statusCode().equals(HttpStatus.OK)) {
-                        return@exchangeToMono response.bodyToMono(CreateMeetingTokenStatus::class.java)
-                    } else {
-                        return@exchangeToMono response.bodyToMono(String::class.java)
-                    }
-
-                }
+                .exchange()
                 .block()
 
-            if (responseBody is CreateMeetingTokenStatus) {
-                return responseBody
+            if (HttpStatus.OK == response?.statusCode()) {
+                return response.bodyToMono(CreateMeetingTokenStatus::class.java).block()!!
             } else {
-                throw RestClientException(
-                    responseBody!!.toString(),
-                    clientResponse?.createException()?.block() as Throwable
-                )
+                throw Throwable("${response?.statusCode()} \n ${response?.bodyToMono(String::class.java)?.block()}")
             }
         }
     }
@@ -265,27 +202,16 @@ class DrakkarWebClient {
                 queryParams["offset"] = offset.toString()
             }
 
-            var clientResponse: ClientResponse? = null
-            val responseBody = webClient()
+            val response = webClient()
                 .get()
-                .uri{uriBuilder -> uriBuilder.path("api/encounters/").queryParams(queryParams).build()}
-                .exchangeToMono { response ->
-                    clientResponse = response
-                    if (response.statusCode().equals(HttpStatus.OK)) {
-                        return@exchangeToMono response.bodyToMono(Encounters::class.java)
-                    } else {
-                        return@exchangeToMono response.bodyToMono(String::class.java)
-                    }
-                }
+                .uri { uriBuilder -> uriBuilder.path("api/encounters/").queryParams(queryParams).build() }
+                .exchange()
                 .block()
 
-            if (responseBody is Encounters) {
-                return responseBody
+            if (HttpStatus.OK == response?.statusCode()) {
+                return response.bodyToMono(Encounters::class.java).block()!!
             } else {
-                throw RestClientException(
-                    responseBody!!.toString(),
-                    clientResponse?.createException()?.block() as Throwable
-                )
+                throw Throwable("${response?.statusCode()} \n ${response?.bodyToMono(String::class.java)?.block()}")
             }
         }
 
@@ -296,27 +222,16 @@ class DrakkarWebClient {
          * @return Encounter object representing the Encounter Entity itself @see io.aretemed.drakkar.model.Encounter
          */
         fun encounter(id: String): Encounter {
-            var clientResponse: ClientResponse? = null
-            val responseBody = webClient()
+            val response = webClient()
                 .get()
                 .uri("api/encounters/${id}/")
-                .exchangeToMono { response ->
-                    clientResponse = response
-                    if (response.statusCode().equals(HttpStatus.OK)) {
-                        return@exchangeToMono response.bodyToMono(Encounter::class.java)
-                    } else {
-                        return@exchangeToMono response.bodyToMono(String::class.java)
-                    }
-                }
+                .exchange()
                 .block()
 
-            if (responseBody is Encounter) {
-                return responseBody
+            if (HttpStatus.OK == response?.statusCode()) {
+                return response.bodyToMono(Encounter::class.java).block()!!
             } else {
-                throw RestClientException(
-                    responseBody!!.toString(),
-                    clientResponse?.createException()?.block() as Throwable
-                )
+                throw Throwable("${response?.statusCode()} \n ${response?.bodyToMono(String::class.java)?.block()}")
             }
         }
     }

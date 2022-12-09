@@ -8,14 +8,14 @@ This document describes a way of how to include the "Drakkar Telehealth SDK" int
 #### Add Dependency
 - Gradle
 ```
-implementation("io.aretemed.drakkar:sdk-java:1.0.10")
+implementation("io.aretemed.drakkar:sdk-java:1.0.11")
 ```
 - Or Maven
 ```
 <dependency>
     <groupId>io.aretemed.drakkar</groupId>
     <artifactId>sdk-java</artifactId>
-    <version>1.0.10</version>
+    <version>1.0.11</version>
 </dependency>
 ```
 #### Include "Component Scan" for "io.aretemed", e.g.
