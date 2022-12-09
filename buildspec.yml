@@ -9,4 +9,5 @@ phases:
       - mv gradle.properties.local gradle.properties
   build:
     commands:
+      - gradle build
       - gradle publishAllPublicationsToMavenRepository
