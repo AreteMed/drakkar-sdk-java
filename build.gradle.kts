@@ -12,7 +12,7 @@ plugins {
 }
 
 group = "io.aretemed.drakkar"
-version = "1.0.11"
+version = "1.0.12"
 
 val springBootVersion by extra("2.1.5.RELEASE")
 val kotlinxCoroutinesVersion by extra("1.4.3")
@@ -120,6 +120,10 @@ publishing {
 
 signing {
     sign(publishing.publications["mavenCentral"])
+}
+
+tasks.getByName<Jar>("jar") {
+    enabled = true
 }
 
 tasks.test {
