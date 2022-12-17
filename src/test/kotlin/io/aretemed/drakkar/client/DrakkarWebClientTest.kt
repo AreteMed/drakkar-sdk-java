@@ -32,10 +32,10 @@ class DrakkarWebClientTest {
         val testUrl = "http://localhost"
         mockServer.start()
         mockServer.url(testUrl)
-        webClient.properties = DrakkarWebClientProperties(
-            baseUrl = "${testUrl}:${mockServer.port}/",
-            token = "TestToken"
-        )
+        val properties = DrakkarWebClientProperties()
+        properties.baseUrl = "${testUrl}:${mockServer.port}/"
+        properties.token = "TestToken"
+        webClient.properties = properties
     }
 
     @AfterAll

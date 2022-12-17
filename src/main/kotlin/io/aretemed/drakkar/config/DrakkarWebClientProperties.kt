@@ -9,7 +9,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 @EnableConfigurationProperties
 @ConfigurationProperties(prefix = "io.aretemed.drakkar")
 @Generated
-data class DrakkarWebClientProperties(
-    var baseUrl: String?,
-    var token: String?,
-)
+class DrakkarWebClientProperties{
+    var baseUrl: String? = null
+    var token: String? = null
+}

@@ -99,7 +99,8 @@ data class CreateMeetingTokenInfo(
     val userId: String,
     @JsonProperty("user_name")
     val userName: String,
-    @JsonProperty("is_owner")
+    @get:JsonProperty("is_owner")
+    @param:JsonProperty("is_owner")
     val isOwner: Boolean
 )
 
