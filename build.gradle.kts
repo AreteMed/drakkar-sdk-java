@@ -12,9 +12,9 @@ plugins {
 }
 
 group = "io.aretemed.drakkar"
-version = "1.0.9"
+version = "2.5.9"
 
-val springBootVersion by extra("2.1.5.RELEASE")
+val springBootVersion by extra("2.5.9")
 val kotlinxCoroutinesVersion by extra("1.6.4")
 
 
