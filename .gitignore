@@ -1,7 +1,6 @@
 .gradle
 build/
 gradle.properties.local
-gradle.properties.ci
 .gradletasknamecache
 secring.kbx
 
