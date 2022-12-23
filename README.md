@@ -31,13 +31,25 @@ io.aretemed.drakkar:
 #### "Inject" DrakkarWebClient
 - Kotlin Example
 ```
+//e.g. by @Autowired
 @Autowired
 private lateinit var drakkarWebClient: DrakkarWebClient
+
+//or by Constructor
+constructor(drakkarWebClient: DrakkarWebClient){
+    this.drakkarWebClient = drakkarWebClient
+}
 ```
 - Or Java Example
 ```
+//e.g. by @Autowired
 @Autowired
 private DrakkarWebClient drakkarWebClient;
+
+//or by Constructor
+AnyService(DrakkarWebClient drakkarWebClient){
+    this.drakkarWebClient = drakkarWebClient;
+}
 ```
 #### Enjoy the Drakkar Telehealth SDK
 E.g. in order to get Rooms just do the following
