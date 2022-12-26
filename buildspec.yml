@@ -1,19 +1,24 @@
+## NOTE: This buildspec is just for posterity -- because of the chicanery we need for multiple builds, 
+## it is being moved into the CodeBuild Project for edits during manual deployments
 version: 0.2
 
 env:
   shell: bash
-  parameter-store:
-    KEYRINGFILE: /drakkar/java-sdk/KEYRINGFILE
-    OSSRH_USER: /drakkar/java-sdk/OSSRH_USER
-    OSSRH_PASSWORD: /drakkar/java-sdk/OSSRH_PASSWORD
-    SIGNING_KEY: /drakkar/java-sdk/SIGNING_KEY
-    SIGNING_PASSPHRASE: /drakkar/java-sdk/SIGNING_PASSPHRASE
+  ## These PS configs are valid but Gradle needs be at a point where it can read env vars from the system.
+  ## Until then, we need to run the gradle.properties.local file stored in the docker images
+  ## Ref: https://linchpiner.github.io/gradle-for-devops-2.html
+  # parameter-store:
+  #   KEYRINGFILE: /drakkar/java-sdk/KEYRINGFILE
+  #   OSSRH_USER: /drakkar/java-sdk/OSSRH_USER
+  #   OSSRH_PASSWORD: /drakkar/java-sdk/OSSRH_PASSWORD
+  #   SIGNING_KEY: /drakkar/java-sdk/SIGNING_KEY
+  #   SIGNING_PASSPHRASE: /drakkar/java-sdk/SIGNING_PASSPHRASE
 phases:
   pre_build:
     commands:
       - cp /home/gradle/project/* .
-      # - mv gradle.properties.local gradle.properties
-      - mv gradle.properties.ci gradle.properties
+      - mv gradle.properties.local gradle.properties
+      # - mv gradle.properties.ci gradle.properties
   build:
     commands:
       - gradle build

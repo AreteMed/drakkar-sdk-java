@@ -1,4 +1,5 @@
-FROM 359743534547.dkr.ecr.us-east-2.amazonaws.com/gradle:jdk11
+ARG IMAGE=359743534547.dkr.ecr.us-east-2.amazonaws.com/gradle:jdk11
+FROM $IMAGE
 
 RUN mkdir /home/gradle/project
 
