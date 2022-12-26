@@ -1,0 +1,7 @@
+kotlin.code.style=official
+signing.keyId=$SIGNING_KEY
+signing.password=$SIGNING_PASSPHRASE
+signing.secretKeyRingFile=$KEYRINGFILE
+
+ossrhUsername=$OSSRH_USER
+ossrhPassword=$OSSRH_PASSWORD
